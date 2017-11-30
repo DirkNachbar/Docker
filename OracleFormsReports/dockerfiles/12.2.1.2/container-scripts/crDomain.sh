@@ -94,7 +94,8 @@ if ! test -d "${DOMAIN_BASE}/${DOMAIN_NAME}"; then
       echo "Starting Managed Server ${REPORTS_MS_NAME}, wait for 2 Minutes"
       echo "==========================================="
       sleep 120
-      cd ${SCRIPT_HOME}/crReports.sh
+      cd ${SCRIPT_HOME}
+      ${SCRIPT_HOME}/crReports.sh
       echo "Oracle Reports Server ${REP_SERVER_NAME} is created"
    fi
 
