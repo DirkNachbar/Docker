@@ -53,3 +53,11 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
          # . . . <BEA-000365> <Server state changed to RUNNING.>
          docker logs -f frfmw
 
+   - To startup the Managed Server and Oracle HTTP Server connect with a browser on your Docker Host to the forwarded AdminServer port (most likely 7001) to the Enterprise Manager Fusion Middleware Control (http://localhost:7001/em)
+   - To startup the created Oracle Reports Server use following commands:
+
+         docker exec -ti frfmw /bin/bash
+         cd /opt/oracle/user_projects/domains/<DOMAIN_NAME>/bin
+         ./startComponent.sh <REPORTS_SERVER_NAME>
+         exit
+
