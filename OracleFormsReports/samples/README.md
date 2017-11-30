@@ -30,7 +30,7 @@
           docker-compose up -d frfmw
           docker logs -f frfmw
 5. Starting the Managed Servers, Oracle HTTP Server and Reports Server
-    - **Ensure that the frfmw container is up and running
+    - **Ensure that the frfmw container is up and running**
     - Connect with a browser on your docker host to the forwarded WebLogic AdminServer Port (most likely 7001) to the Enterprise Manager Fusion Middleware Control (http://localhost:7001/em)
         - Startup the Managed Servers for Forms and Reports and the Oracle HTTP Server
     - For starting up the created Reports Server use following commands:
