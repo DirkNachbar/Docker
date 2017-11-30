@@ -1,0 +1,82 @@
+version: "3.0"
+
+services:
+  #
+  #  The Oracle DB Definition
+  # 
+  frdb:
+    image: oracle/database:12.1.0.2-ee
+    ports:
+      - "${DC_ORCL_PORT}:1521"
+      - "${DC_ORCL_OEM_PORT}:5500"
+    environment:
+      - ORACLE_SID=${DC_ORCL_SID}
+      - ORACLE_PDB=${DC_ORCL_PDB}
+      - ORACLE_PWD=${DC_ORCL_SYSPWD}
+    container_name: frdb
+    volumes:
+      - ${DC_ORCL_DBDATA}:/opt/oracle/oradata
+
+  #
+  #   The Forms & Reports Servers
+  #    
+  frfmw:
+    image: ${DC_REGISTRY_FR}/oracle/formsreports:${DC_FR_VERSION}
+    container_name: frfmw
+    command: /bin/bash -c "sleep 5s; /opt/oracle/dockertools/crDomain.sh"
+    ports:
+      - "${DC_ADMINPORT}:${DC_ADMINPORT}"
+      - "${DC_FORMS12C_MS_PORT}:${DC_FORMS12C_MS_PORT}"
+      - "${DC_REPORTS12C_MS_PORT}:${DC_REPORTS12C_MS_PORT}"
+      - "${DC_OHS_LISTENPORT}:${DC_OHS_LISTENPORT}"
+      - "${DC_NM_PORT}:${DC_NM_PORT}"
+    environment:
+      - SCRIPT_HOME=${DC_SCRIPT_HOME}
+      - INT_ORACLE_HOME=${DC_INT_ORACLE_HOME}
+      - WL_HOME=${DC_WL_HOME}
+      - WLST_HOME=${DC_WLST_HOME}
+      - MW=${DC_MW}
+      - DOMAIN_BASE=${DC_DOMAIN_BASE}
+      - APPLICATION_BASE=${DC_APPLICATION_BASE}
+      - APP_VZ=${DC_APP_VZ}
+      - FORMS12C=${DC_FORMS12C}
+      - REPORTS12C=${DC_REPORTS12C}
+      - WEBTIER12C=${DC_WEBTIER12C}
+      - OHS_COMPONENTNAME=${DC_OHS_COMPONENTNAME}
+      - OHS_LISTENPORT=${DC_OHS_LISTENPORT}
+      - OHS_SSLPORT=${DC_OHS_SSLPORT}
+      - TEMPLATE=${DC_TEMPLATE}
+      - DOMAIN_NAME=${DC_DOMAIN_NAME}
+      - AS_NAME=${DC_AS_NAME}
+      - ADM_USER=${DC_ADM_USER}
+      - ADM_PWD=${DC_ADM_PWD}
+      - ADMINPORT=${DC_ADMINPORT}
+      - ADMINPORTSSL=${DC_ADMINPORTSSL}
+      - AS_HOST=${DC_AS_HOST}
+      - FORMS_MS_NAME=${DC_FORMS_MS_NAME}
+      - FORMS12C_MS_PORT=${DC_FORMS12C_MS_PORT}
+      - REPORTS_MS_NAME=${DC_REPORTS_MS_NAME}
+      - REPORTS12C_MS_PORT=${DC_REPORTS12C_MS_PORT}
+      - REPORTS_IN_FORMS=${DC_REPORTS_IN_FORMS}
+      - REP_SERVER=${DC_REP_SERVER}
+      - REP_SERVER_NAME=${DC_REP_SERVER_NAME}
+      - NM_LISTENADDRESS=${DC_NM_LISTENADDRESS}
+      - NM_TYPE=${DC_NM_TYPE}
+      - NM_PORT=${DC_NM_PORT}
+      - NM_USERNAME=${DC_NM_USERNAME}
+      - NM_PWD=${DC_NM_PWD}
+      - DBUSER=${DC_DBUSER}
+      - DBPWD=${DC_DBPWD}
+      - DBROLE=${DC_DBROLE}
+      - COMPONENTPWD=${DC_COMPONENTPWD}
+      - SCHEMA_PREFIX=${DC_SCHEMA_PREFIX}
+      - DB_HOST=${DC_DB_HOST}
+      - DB_PORT=${DC_DB_PORT}
+      - DB_SERVICE=${DC_DB_SERVICE}
+      - DB_OMF=${DC_DB_OMF}
+      - DB_USER_PW=${DC_DB_USER_PW}
+      - PWDFILE=${DC_PWDFILE}
+    volumes:
+      - ${DC_DDIR_FR}:/opt/oracle/user_projects
+
+
