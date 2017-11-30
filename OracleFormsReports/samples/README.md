@@ -35,7 +35,7 @@
         - Startup the Managed Servers for Forms and Reports and the Oracle HTTP Server
     - For starting up the created Reports Server use following commands:
 
-         docker exec -ti frfmw /bin/bash
-         cd /opt/oracle/user_projects/domains/<DOMAIN_NAME>/bin
-         ./startComponent.sh <REPORTS_SERVER_NAME>
+          docker exec -ti frfmw /bin/bash
+          cd /opt/oracle/user_projects/domains/<DOMAIN_NAME>/bin
+          ./startComponent.sh <REPORTS_SERVER_NAME>
 
