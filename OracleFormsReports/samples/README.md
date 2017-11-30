@@ -4,7 +4,15 @@
    - Update the `OracleFormsReports/setenv.sh` file to point
      to the right locations for the following environment variables
      specific to your environment (See top of file):    
-     `DC_USERHOME`, `DC_REGISTRY_FR`, `DC_REGISTRY_DB`    
+     `DC_USERHOME`, `DC_REGISTRY_FR`, `DC_REGISTRY_DB` and all Forms & Reports specific environment variables `DC_xxx`
+   - Create the referenced volume directories on your host (e.g. /opt/oracle/oradata and /opt/oracle/user_projects) and change ownership to oracle:oinstall
+
+         mkdir -p /opt/oracle/oradata
+         mkdir -p /opt/oracle/user_projects
+         chown -R oracle:oinstall /opt/oracle/oradata
+         chown -R oracle:oinstall /opt/oracle/user_projects
+         chmod -r 777 /opt/oracle/oradata
+         chmod -r 777 /opt/oracle/user_projects
 
 2. Setup your current environment (running `bash`)
 

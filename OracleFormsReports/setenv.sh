@@ -119,7 +119,7 @@ if [ -d "${DC_ORCL_DBDATA}" ]; then
 fi
 
 if [ -d "${DC_DDIR_FR}" ]; then
-   mkdir ${DC_DDIR_FR}
+   mkdir -p ${DC_DDIR_FR}
    chmod 777 ${DC_DDIR_FR}
 fi
 
