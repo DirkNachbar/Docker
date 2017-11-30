@@ -40,4 +40,16 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
 
 4. Change to the subdirectory OracleFormsReports/sample
    - Align the ../setenv.sh file with your personal settings
+   - Afterwards execute following commands:
+
+         source ../setenv.sh
+         docker-compose up -d frfmw; docker logs frfmw -f
+
+5. Startup the frfmw container
+   - To startup the frfmw container (Node Manager and AdminServer) use following command
+
+         docker start frfmw
+         # Tail the container logs until you see the line
+         # . . . <BEA-000365> <Server state changed to RUNNING.>
+         docker logs -f frfmw
 
