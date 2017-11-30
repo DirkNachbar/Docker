@@ -20,6 +20,7 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
          ./buildDockerImage.sh
 
    - This will create an Image with OracleLinux:latest containing the Oracle JDK 8u151
+   - **Resulting Image => oracle/serverjdk**
 
 2. Change to the subdirectory OracleFMWInfrastructure/dockerfiles
    - Place the fmw_12.2.1.2.0_infrastructure_Disk1_1of1.zip file under OracleFMWInfrastructure/dockerfiles/12.2.1.2
@@ -27,5 +28,16 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
          ./buildDockerImage.sh -v 12.2.1.2
 
    - This extend the oracle/serverjdk image with several required RPM's for Oracle Forms & Reports and install an Oracle WebLogic Server Infrastructure 12.2.1.2.0
+   - **Resulting Image => oracle/fmw-infrastructure**
 
+3. Change to the subdirectory OracleFormsReports/dockerfiles
+   - Place the fmw_12.2.1.2.0_fr_linux64.bin file under OracleFormsReports/dockerfiles/12.2.1.2
+
+         ./buildDockerImage.sh
+
+   - This extend the oracle/fmw-infrastructure image with Oracle Forms & Reports 12.2.1.2.0 Software
+   - **Resulting Image => localhost/oracle/formsreports**
+
+4. Change to the subdirectory OracleFormsReports/sample
+   - Align the ../setenv.sh file with your personal settings
 
