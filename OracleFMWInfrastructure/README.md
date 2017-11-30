@@ -1,7 +1,8 @@
 Oracle Fusion Middleware Infrastructure on Docker
 =================================================
 This Docker configuration has been used to create the Oracle Fusion Middleware Infrastructure image. Providing this FMW image facilitates the configuration, and environment setup for DevOps users.
-This Image will be used for the Oracle Forms & Reports 12.2.1.2.0 Image
+
+This Image will be used for the Oracle Forms & Reports 12.2.1.2.0 Image, therefor we will install several required RPM's for the upcoming Oracle Forms & Reports Image
 
 ## How to build and run
 This project offers a sample Dockerfile and scripts to build a Oracle Fusion Middleware Infrastructue 12cR2 (12.2.1.x) image. To assist in building the image, you can use the [buildDockerImage.sh](dockerfiles/buildDockerImage.sh) script. See below for instructions and usage.
