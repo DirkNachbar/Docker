@@ -20,16 +20,7 @@
 # Set Start Time
 start_time=$(date +%s)
 
-echo ${DOMAIN_NAME}
-
-
-echo $ORACLE_HOME
-echo "ADM_PWD = ${ADM_PWD}"
-echo "TEMPLATE = ${TEMPLATE}"
-echo "ADMINPORT = ${ADMINPORT}"
-echo "MW = ${MW}"
-echo "ADMINPORTSSL = ${ADMINPORTSSL}"
-echo "DOMAIN_NAME = ${DOMAIN_NAME}"
+echo "Building Forms & Reports Domain: ${DOMAIN_NAME}"
 
 function warten
 {

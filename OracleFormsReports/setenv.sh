@@ -80,6 +80,10 @@ exportComposeEnv() {
   # Move Reports Application into WLS_FORMS (true or false)
   export DC_REPORTS_IN_FORMS=false
 
+  # Reports Server Definitions
+  export DC_REP_SERVER=true
+  export DC_REP_SERVER_NAME=repserver1
+
   # NodeManager
   export DC_NM_LISTENADDRESS=`hostname -f`
   export DC_NM_TYPE=SSL
@@ -127,6 +131,6 @@ fi
 #
 echo "INFO: Setting up Forms & Reports Docker Environment..."
 exportComposeEnv
-createDirs
+# createDirs
 #echo "INFO: Environment variables"
 #env | grep -e "DC_" | sort
