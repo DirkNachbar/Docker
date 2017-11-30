@@ -63,6 +63,12 @@ if ! test -d "${DOMAIN_BASE}/${DOMAIN_NAME}"; then
       echo "==========================================="
       cd ${SCRIPT_HOME}
       ${SCRIPT_HOME}/crFRExtension.sh
+      mkdir -p  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${FORMS_MS_NAME}/security
+      echo "username=${ADM_USER}" >  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${FORMS_MS_NAME}/security/boot.properties
+      echo "password=${ADM_PWD}" >> ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${FORMS_MS_NAME}/security/boot.properties
+      mkdir -p  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${REPORTS_MS_NAME}/security
+      echo "username=${ADM_USER}" >  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${REPORTS_MS_NAME}/security/boot.properties
+      echo "password=${ADM_PWD}" >> ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${REPORTS_MS_NAME}/security/boot.properties
       echo "DOMAIN with Forms and Reports are created"
    fi
 
