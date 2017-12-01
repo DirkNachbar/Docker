@@ -1,6 +1,6 @@
 Oracle Forms & Reports on Docker
 =====
-This github Repository contains all necessary Docker buildfiles to create an Oracle Forms & Reports 12.2.1.2.0 environment under Docker
+This github Repository contains all necessary Docker buildfiles to create an Oracle Forms & Reports 12.2.1.2.0 and Oracle Forms & Reports 12.2.1.3.0 environments under Docker
 
 ## Requirements
 - Docker Host with Docker 17 or higher
