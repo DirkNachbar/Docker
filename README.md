@@ -74,6 +74,9 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
          ./startComponent.sh <REPORTS_SERVER_NAME>
          exit
 
+6. Configure your Forms & Reports
+   - As the complete `$DOMAIN_HOME` is mapped to a volume (/opt/oracle/user_projects/<DOMAIN_NAME>) you can directly edit from the Docker Host your various configuration files, e.g. formsweb.cfg, rwserver.conf, httpd.conf and so on
+
 ## How to build Oracle Forms & Reports 12.2.1.3.0
 Get a copy of this repository on your Docker host, make sure that your Docker host have either direct Internet Connection or configure a Proxy to be able to run required `yum install` commands inside the Docker build files
 
@@ -138,5 +141,8 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
          cd /opt/oracle/user_projects/domains/<DOMAIN_NAME>/bin
          ./startComponent.sh <REPORTS_SERVER_NAME>
          exit
+
+6. Configure your Forms & Reports
+   - As the complete `$DOMAIN_HOME` is mapped to a volume (/opt/oracle/user_projects/<DOMAIN_NAME>) you can directly edit from the Docker Host your various configuration files, e.g. formsweb.cfg, rwserver.conf, httpd.conf and so on
 
 
