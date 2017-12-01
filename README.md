@@ -145,4 +145,6 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
 6. Configure your Forms & Reports
    - As the complete `$DOMAIN_HOME` is mapped to a volume (/opt/oracle/user_projects/<DOMAIN_NAME>) on your Docker host, you can directly edit from the Docker Host your various configuration files, e.g. formsweb.cfg, rwserver.conf, httpd.conf and so on
 
+## License
 
+To download and run Oracle Fusion Middleware and Oracle JDK, regardless whether inside or outside a Docker container, you must download the binaries from the Oracle website and accept the license indicated at that page.
