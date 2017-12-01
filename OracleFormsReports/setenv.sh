@@ -107,7 +107,7 @@ exportComposeEnv() {
   #
   # Default version to use for compose images
   #
-  export DC_FR_VERSION=12.2.1.2
+  export DC_FR_VERSION=12.2.1.3
 }
 
 #===============================================
