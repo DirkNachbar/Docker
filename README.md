@@ -52,7 +52,8 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
    - **Resulting Image => localhost/oracle/formsreports TAG: 12.2.1.2**
 
 4. Change to the subdirectory OracleFormsReports/sample
-   - Align the ../setenv.sh file with your personal settings
+   - Align the ../setenv.sh file with your personal settings (**Important**: Change the variable DC_FR_VERSION to 12.2.1.2)
+   - Make sure your target Oracle Database for the configuration of the RCU is up and running and reachable
    - Afterwards execute following commands:
 
          source ../setenv.sh
@@ -121,6 +122,7 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
 
 4. Change to the subdirectory OracleFormsReports/sample
    - Align the ../setenv.sh file with your personal settings (**Important**: Change the variable DC_FR_VERSION to 12.2.1.3)
+   - Make sure your target Oracle Database for the configuration of the RCU is up and running and reachable
    - Afterwards execute following commands:
 
          source ../setenv.sh
