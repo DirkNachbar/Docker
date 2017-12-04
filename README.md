@@ -11,6 +11,11 @@ This github Repository contains all necessary Docker buildfiles to create an Ora
 
 For a good HowTo setup your initial Docker environment, you may have a look on Gerald Venzl's Blog https://geraldonit.com/2017/08/21/creating-an-oracle-database-docker-image/ . Specially the section "Increase base image size" will save you a lot of trouble ;-)
 
+The installation of docker-compose is quite simple, from your Docker host run following commands:
+
+         sudo curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+         sudo chmod +x /usr/local/bin/docker-compose
+
 ## How to build Oracle Forms & Reports 12.2.1.2.0
 Get a copy of this repository on your Docker host, make sure that your Docker host have either direct Internet Connection or configure a Proxy to be able to run required `yum install` commands inside the Docker build files
 
