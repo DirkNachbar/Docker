@@ -15,6 +15,8 @@ The installation of docker-compose is quite simple, from your Docker host run fo
 
          sudo curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
          sudo chmod +x /usr/local/bin/docker-compose
+         docker-compose --version
+         docker-compose version 1.17.0, build ac53b73
 
 ## How to build Oracle Forms & Reports 12.2.1.2.0
 Get a copy of this repository on your Docker host, make sure that your Docker host have either direct Internet Connection or configure a Proxy to be able to run required `yum install` commands inside the Docker build files
