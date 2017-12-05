@@ -126,7 +126,7 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
       - In the OracleFormsReports/setenv.sh file set the environment variable `export DC_FADS12C=true`
 
 
-         ./buildDockerImage.sh -v 12.2.1.3
+         `./buildDockerImage.sh -v 12.2.1.3`
 
    - This extend the oracle/fmw-infrastructure image with Oracle Forms & Reports 12.2.1.3.0 Software
    - **Resulting Image => localhost/oracle/formsreports TAG: 12.2.1.3**
@@ -168,6 +168,8 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
          # Finally the fads_config.py will exit the AdminServer and therefor your Docker container frfmw
          # Restart your Docker container frfmw
          docker start frfmw
+
+   - After the AdminServer is started up you can access the FADS UI via http://localhost:7001/fadsui
 
 ## License
 
