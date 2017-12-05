@@ -49,6 +49,7 @@ exportComposeEnv() {
 
   # install forms true / false
   export DC_FORMS12C=true
+  export DC_FADS12C=true
   # install reports true / false
   export DC_REPORTS12C=true
   # install OHS true / false

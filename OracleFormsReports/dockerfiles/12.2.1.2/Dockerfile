@@ -26,9 +26,7 @@ ENV FMW_BIN=fmw_12.2.1.2.0_fr_linux64.bin
 # -----------------------------------
 ADD  $FMW_BIN /opt/
 COPY container-scripts/* /opt/oracle/dockertools/
-RUN  yum install -y hostname && \
-     rm -rf /var/cache/yum &&      \
-     cd /opt && chmod 755 *.bin && \
+RUN  cd /opt && chmod 755 *.bin && \
      chmod a+xr /opt/oracle/dockertools/*.*
 #
 USER oracle

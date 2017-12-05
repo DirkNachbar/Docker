@@ -12,6 +12,7 @@ v_adminportssl=os.environ['ADMINPORTSSL']
 v_domainName=os.environ['DOMAIN_NAME']
 v_template=os.environ['TEMPLATE']
 v_javaHome=os.environ['JAVA_HOME']
+v_fads=os.environ['FADS12C']
 v_setup_domain_base=os.environ['DOMAIN_BASE']
 v_setup_application_base=os.environ['APPLICATION_BASE']
 v_OracleHome=os.environ['INT_ORACLE_HOME']
@@ -36,6 +37,10 @@ def printInfo(infoText):
     print "-->: "+infoText
 
 printHeader("Started: crDomain.py")
+if v_fads == "true":
+   printInfo("FADS selected => AdminServer needs to be aligned to AdminServer !!")
+   v_asName='AdminServer'
+
 
 printHeader("Create password file")
 os.system("echo "+v_dbPwd+">"+v_pwdfile)
@@ -47,18 +52,18 @@ os.system("echo " +v_componentPassword+ ">>"+v_pwdfile)
 
 printHeader("Step: create repository - started")
 printInfo("Drop repository "+v_SchemaPrefix)
-os.system(v_OracleHome + "/oracle_common/bin/rcu -silent -dropRepository -databaseType ORACLE -connectString "+ v_rcudbstr +" -dbUser "+v_dbUser+" -dbRole "+v_dbRole+" -schemaPrefix "+v_SchemaPrefix+" -component STB -component IAU -component IAU_APPEND -component IAU_VIEWER -component OPSS -f <"+v_pwdfile)
+os.system(v_OracleHome + "/oracle_common/bin/rcu -silent -dropRepository -databaseType ORACLE -connectString "+ v_rcudbstr +" -dbUser "+v_dbUser+" -dbRole "+v_dbRole+" -schemaPrefix "+v_SchemaPrefix+" -component STB -component IAU -component IAU_APPEND -component IAU_VIEWER -component OPSS -component MDS -component UCSUMS -f <"+v_pwdfile)
 printInfo("Repository "+v_SchemaPrefix+" dropped")
 
 printInfo("Create repository "+v_SchemaPrefix+" - started")
-os.system(v_OracleHome + "/oracle_common/bin/rcu -silent -createRepository -honorOMF "+ v_dbOmf +" -connectString "+ v_rcudbstr +" -dbUser "+v_dbUser+" -dbRole "+v_dbRole+" -useSamePasswordForAllSchemaUsers true -schemaPrefix "+v_SchemaPrefix+" -component STB -component IAU -component IAU_APPEND -component IAU_VIEWER -component OPSS -f < "+v_pwdfile)
+os.system(v_OracleHome + "/oracle_common/bin/rcu -silent -createRepository -honorOMF "+ v_dbOmf +" -connectString "+ v_rcudbstr +" -dbUser "+v_dbUser+" -dbRole "+v_dbRole+" -useSamePasswordForAllSchemaUsers true -schemaPrefix "+v_SchemaPrefix+" -component STB -component IAU -component IAU_APPEND -component IAU_VIEWER -component OPSS -component MDS -component UCSUMS -f < "+v_pwdfile)
 printInfo("Repository "+v_SchemaPrefix+" created")
 
 printHeader("Step: Read default template (always wls.jar!!)")
 readTemplate(v_template)
 printInfo("Template: "+v_template+" successfully read")   
 
-printHeader("Step: Prepare Domain --> Set Domain Name to"+v_domainName)
+printHeader("Step: Prepare Domain --> Set Domain Name to "+v_domainName)
 cd('/')
 cmo.setName(v_domainName)
 printInfo("Step: Set Domain Name --> Successful")

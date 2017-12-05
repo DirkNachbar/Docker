@@ -121,6 +121,9 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
 
 3. Change to the subdirectory OracleFormsReports/dockerfiles
    - Place the fmw_12.2.1.3.0_fr_linux64.bin and fmw_12.2.1.3.0_fr_linux64-2.zip files under OracleFormsReports/dockerfiles/12.2.1.3
+   - In case you want to enable Oracle Forms Application Deployment Services (FADS), you will need to place under OracleFormsReports/dockerfiles/12.2.1.3 the binary file of SQLDeveloper 17.3.1 (http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html)
+      - Depending on the SQLDeveloper binary file you will download, you need to align the Dockerfile named Dockerfile_fads under OracleFormsReports/dockerfiles/12.2.1.3. Search for the line `ENV SQLDEV=` and place your zip-file name there.
+      - In the OracleFormsReports/setenv.sh file set the environment variable `export DC_FADS12C=true`
 
          ./buildDockerImage.sh -v 12.2.1.3
 
@@ -153,6 +156,17 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
 
 6. Configure your Forms & Reports
    - As the complete `$DOMAIN_HOME` is mapped to a volume (/opt/oracle/user_projects/<DOMAIN_NAME>) on your Docker host, you can directly edit from the Docker Host your various configuration files, e.g. formsweb.cfg, rwserver.conf, httpd.conf and so on
+
+7. Configure FADS (only Forms & Reports 12.2.1.3.0)
+   - In order to complete your FADS configuration you will need to execute the fads_config.py script
+
+         docker exec -ti frfmw /bin/bash
+         cd /opt/oracle/oracle_common/common/bin
+         ./wlst.sh /opt/oracle/forms/fads/fads_config.py
+         # Answer all questions
+         # Finally the fads_config.py will exit the AdminServer and therefor your Docker container frfmw
+         # Restart your Docker container frfmw
+         docker start frfmw
 
 ## License
 

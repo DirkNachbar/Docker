@@ -21,6 +21,12 @@ echo "==========================================================================
 
      # In case we are facing problems with /dev/random
      export CONFIG_JVM_ARGS=-Djava.security.egd=file:/dev/./urandom:$CONFIG_JVM_ARGS
+     # Avoiding MDS-11019 error messages with Docker
+     #export JAVA_OPTIONS="${JAVA_OPTIONS} -Dfile.encoding=UTF8"
+     export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Dfile.encoding=UTF8"
+
+     # FADS Hack with Docker
+     cd ${DOMAIN_BASE}
 
      ${WLST_HOME}/wlst.sh ${SCRIPT_HOME}/crFRExtension.py 
 

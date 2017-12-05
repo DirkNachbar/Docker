@@ -50,6 +50,8 @@ if ! test -d "${DOMAIN_BASE}/${DOMAIN_NAME}"; then
 
    # In case we are facing problems with /dev/random
    export CONFIG_JVM_ARGS=-Djava.security.egd=file:/dev/./urandom:$CONFIG_JVM_ARGS
+   # Avoiding MDS-11019 error messages
+   export JAVA_OPTIONS="${JAVA_OPTIONS} -Dfile.encoding=UTF8"
 
    ${WLST_HOME}/wlst.sh ${SCRIPT_HOME}/crDomain.py 
 

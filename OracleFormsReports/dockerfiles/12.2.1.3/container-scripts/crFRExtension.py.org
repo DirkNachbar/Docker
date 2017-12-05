@@ -7,7 +7,7 @@ import os, sys
 v_forms=os.environ['FORMS12C']
 v_formsMSName=os.environ['FORMS_MS_NAME']
 v_formsPort=os.environ['FORMS12C_MS_PORT']
-v_fads=os.environ['FADS12C']
+#v_fads=os.environ['FADS12C']
 v_reports=os.environ['REPORTS12C']
 v_reportsMSName=os.environ['REPORTS_MS_NAME']
 v_reportsPort=os.environ['REPORTS12C_MS_PORT']
@@ -27,9 +27,6 @@ v_setup_domain_base=os.environ['DOMAIN_BASE']
 v_setup_application_base=os.environ['APPLICATION_BASE']
 v_reports_in_forms=os.environ['REPORTS_IN_FORMS']
 v_asName=os.environ['AS_NAME']
-
-if v_fads == "true":
-   v_asName="AdminServer"
 
 def changeDatasourceToXA(datasource):
   print 'Change datasource '+datasource
@@ -67,12 +64,10 @@ try:
     printHeader( "select and load templates")
     selectTemplate('Oracle HTTP Server (Collocated)')
     if v_forms == "true":
-       if v_fads == "true":
-          selectTemplate('Oracle Forms')
-          selectTemplate('Oracle WSM Policy Manager')
-          selectTemplate('Oracle Forms Application Deployment Service (FADS)','12.2.1.3.0')
-       else:
-          selectTemplate('Oracle Forms')
+       selectTemplate('Oracle Forms')
+#    if v_fads == "true":
+#       selectTemplate('Oracle WSM Policy Manager')
+#       selectTemplate('Oracle Forms Application Deployment Services (FADS) Template')
     if v_reports == "true":
        selectTemplate('Oracle Reports Application')
        selectTemplate('Oracle Reports Server')
@@ -81,7 +76,6 @@ try:
     printInfo( "load templates successful")
 except:
     printInfo( "select and load templates failed")
-    dumpStack()
     exit()
 
 printHeader("JDBC configuration")
@@ -150,40 +144,14 @@ except:
     exit()
 
 try:
-    if v_fads == "true":
-       printInfo("Configure mds-owsm")
-       cd('/')
-       cd('JDBCSystemResource/mds-owsm/JdbcResource/mds-owsm')
-       cd('JDBCDriverParams/NO_NAME_0')
-       set('DriverName','oracle.jdbc.OracleDriver')
-       set('URL', v_url)
-       set('PasswordEncrypted', v_pwd)
-       cd('Properties/NO_NAME_0')
-       cd('Property/user')
-       cmo.setValue(v_SchemaPrefix+'_MDS')
-       printInfo("Configure mds-owsm successful")
-except:
-    printInfo("Configure mds-owsm failed")
-    exit()
-
-try:
    printInfo("Modify Datasources: LocalSvcTblDataSource , opss-audit-DBDS, opss-audit-viewDS , opss-data-source")
    changeDatasourceToXA('LocalSvcTblDataSource')
    changeDatasourceToXA('opss-audit-DBDS')
    changeDatasourceToXA('opss-audit-viewDS')
    changeDatasourceToXA('opss-data-source')
-   #if v_fads == "true":
-   #   printInfo("Modify Datasource mds-owsm for FADS")
-   #   changeDatasourceToXA('mds-owsm')
    printInfo("Modify Datasources successful")
 except:
    printInfo("Modify Datasources failed")
-
-if v_fads == "true":
-   printHeader('Setting Server Group WSMPM-MAN-SVR for FADS in ' +v_asName)
-   cd('/')
-   serverGroup = ['JRF-MAN-SVR','WSMPM-MAN-SVR']
-   setServerGroups(v_asName, serverGroup) 
 
 printHeader('Customize Domain Settings')
 try:
@@ -255,7 +223,6 @@ try:
 #    exit()
 except:
    print "Domain could not be saved"
-   dumpStack()
 
 try:
     printHeader("Admin Server will be assigned to Machine")
