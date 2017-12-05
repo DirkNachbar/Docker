@@ -125,6 +125,7 @@ Create your Oracle Database which will host the Metadata Repository for the Orac
       - Depending on the SQLDeveloper binary file you will download, you need to align the Dockerfile named Dockerfile_fads under OracleFormsReports/dockerfiles/12.2.1.3. Search for the line `ENV SQLDEV=` and place your zip-file name there.
       - In the OracleFormsReports/setenv.sh file set the environment variable `export DC_FADS12C=true`
 
+
          ./buildDockerImage.sh -v 12.2.1.3
 
    - This extend the oracle/fmw-infrastructure image with Oracle Forms & Reports 12.2.1.3.0 Software
