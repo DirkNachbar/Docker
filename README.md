@@ -29,8 +29,8 @@ Get a copy of this repository on your Docker host, make sure that your Docker ho
          # uid=54321(oracle) gid=54321(oinstall)
          chown -R oracle:oinstall /opt/oracle/oradata
          chown -R oracle:oinstall /opt/oracle/user_projects
-         chmod -r 777 /opt/oracle/oradata
-         chmod -r 777 /opt/oracle/user_projects
+         chmod -R 777 /opt/oracle/oradata
+         chmod -R 777 /opt/oracle/user_projects
 
 Create your Oracle Database which will host the Metadata Repository for the Oracle Forms & Reports environment. I recommend to use the Docker Image from Oracle https://github.com/oracle/docker-images/tree/master/OracleDatabase
 
