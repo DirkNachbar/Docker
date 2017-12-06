@@ -27,7 +27,7 @@ exit 0
 checkFilePackages() {
   echo "INFO: Checking if required packages are present..."
 
-if [ "${FADS12C}" == "false" ]; then
+if [ "${DC_FADS12C}" == "false" ]; then
   jarList=`grep -v -e "^#.*" install/formsreports.download | awk '{print $2}'`
   for jar in ${jarList}; do
      if [ -s ${jar} ]; then
@@ -45,7 +45,7 @@ EOF
   done
 fi
 
-if [[ "${FADS12C}" == "false"  &&  "${VERSION}" == "12.2.1.3" ]]; then
+if [[ "${DC_FADS12C}" == "true"  &&  "${VERSION}" == "12.2.1.3" ]]; then
   jarList=`grep -v -e "^#.*" install/formsreports_fads.download | awk '{print $2}'`
   for jar in ${jarList}; do
      if [ -s ${jar} ]; then
@@ -120,7 +120,7 @@ versionOK=false
 if [ ${VERSION} = 12.2.1.2 -o ${VERSION} = 12.2.1.3 ]
 then
   IMAGE_NAME="${DC_REGISTRY_FR}/oracle/formsreports:$VERSION"
-  if [ "${FADS12C}" == "false" ]; then
+  if [ "${DC_FADS12C}" == "false" ]; then
      DOCKERFILE_NAME=Dockerfile
   else
      DOCKERFILE_NAME=Dockerfile_fads
