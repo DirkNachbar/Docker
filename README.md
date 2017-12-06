@@ -96,6 +96,8 @@ Get a copy of this repository on your Docker host, make sure that your Docker ho
          # uid=54321(oracle) gid=54321(oinstall)
          chown -R oracle:oinstall /opt/oracle/oradata
          chown -R oracle:oinstall /opt/oracle/user_projects
+         chmod -R 777 /opt/oracle/oradata
+         chmod -R 777 /opt/oracle/user_projects
 
 **Important** In case you are planning to use the new Oracle Forms 12.2.1.3.0 feature Forms Application Deployment Services (FADS), you have to name your WebLogic Admin Server "AdminServer" !!! As this name for the Admin Server is hardcoded in the configuration script for FADS and in the deployed FADS ear-file
 
