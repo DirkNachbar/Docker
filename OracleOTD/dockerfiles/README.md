@@ -12,10 +12,23 @@ Before you Start
 
 Oracle Traffic Director Image
 -------------------------
+1. As pre-requirement you will need following Images:
+   - OracleJDK
+   - OracleFMWInfrastructure
+2. Create OracleJDK Image
+   - Place the JDK 8u151 tar.gz in the folder OracleJava/java-8
+
+         ./buildDockerImage.sh
+
+3. Create OracleFMWInfrastructure Image
+   - Place the fmw_12.2.1.3.0_infrastructure_Disk1_1of1.zip file under OracleFMWInfrastructure/dockerfiles/12.2.1.3
+
+         ./buildDockerImage.sh -v 12.2.1.3
+
 1. You must have the install binary downloaded from the
    [Oracle Technology Network](http://www.oracle.com/technetwork/middleware/otd/downloads/index.html) site before proceeding. 
    Unzip the installation zip file
-   Drop the install binary into the subdirectory 12.2.1.3
+   Drop the install binary into the OracleOTD/dockerfiles/12.2.1.3
 2. From the current directory run these commands. You will 
    be prompted with all the information. Carefully review 
    it and Confirm to proceed. 
