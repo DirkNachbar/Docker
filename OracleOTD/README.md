@@ -6,7 +6,7 @@ Sample Docker build file to facilitate installation, configuration, and environm
 
 ## What is included
 - Sample docker file to build an image containing an Oracle Traffic Director Installation 
-- Docker Compose file to start an instance of Node Manager and Admin Server
+- Docker Compose file to create and start an instance of Node Manager and Admin Server
 
 ## How to build
 [Please review this README file](dockerfiles/README.md)
