@@ -20,5 +20,5 @@ Oracle Traffic Director Image
    be prompted with all the information. Carefully review 
    it and Confirm to proceed. 
 
-       # Use BUILD_OPTS to add extra arguments to the docker build command
-       sh buildDockerImage.sh -v 12.2.1.3
+         # Use BUILD_OPTS to add extra arguments to the docker build command
+         sh buildDockerImage.sh -v 12.2.1.3
