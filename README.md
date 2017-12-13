@@ -1,3 +1,12 @@
+Oracle Middleware on Docker
+=====
+## Oracle Forms & Reports Docker Solution
+- https://github.com/DirkNachbar/Docker#oracle-forms--reports-on-docker
+
+## Oracle Traffic Director Docker Solution
+- https://github.com/DirkNachbar/Docker/tree/master/OracleOTD#oracle-traffic-director-122130-on-docker
+
+
 Oracle Forms & Reports on Docker
 =====
 This github Repository contains all necessary Docker buildfiles to create an Oracle Forms & Reports 12.2.1.2.0 and Oracle Forms & Reports 12.2.1.3.0 environments under Docker
