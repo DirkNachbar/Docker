@@ -22,15 +22,15 @@
          # source ../setenv.sh
 
 4. Starting the Oracle Traffic Director Container. 
-    - First Run will create the Forms & Reports schemas, 
-    - First Run will create the Domain (Base Domain and extending with Oracle Traffic Director) 
-    - Subsequent runs will just start the already configured NodeManager and Admin Server
+   - First Run will create the Forms & Reports schemas, 
+   - First Run will create the Domain (Base Domain and extending with Oracle Traffic Director) 
+   - Subsequent runs will just start the already configured NodeManager and Admin Server
 
          docker-compose up -d otdfmw
          docker logs -f otdfmw
 
 5. Starting the Oracle Traffic Director Instance
-    - **Ensure that the otdfmw container is up and running**
-    - Connect with a browser on your docker host to the forwarded WebLogic AdminServer Port (most likely 7001) to the Enterprise Manager Fusion Middleware Control (http://localhost:7001/em)
-        - Go to `Traffic Director` under the Target Navigation, select the pre-configured Instance and use the `Start Instance`button to start your Instance
+   - **Ensure that the otdfmw container is up and running**
+   - Connect with a browser on your docker host to the forwarded WebLogic AdminServer Port (most likely 7001) to the Enterprise Manager Fusion Middleware Control (http://localhost:7001/em)
+     - Go to `Traffic Director` under the Target Navigation, select the pre-configured Instance and use the `Start Instance`button to start your Instance
 
