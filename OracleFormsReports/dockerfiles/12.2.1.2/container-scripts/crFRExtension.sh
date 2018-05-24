@@ -15,25 +15,28 @@
 #
 #
 #=====================================================================
+#set -e
+set -u
+
 echo "======================================================================================"
 echo " Program  : crFRExtension.sh                                    ........"
 echo "======================================================================================"
 
 # In case we are facing problems with /dev/random
-export CONFIG_JVM_ARGS=-Djava.security.egd=file:/dev/./urandom:$CONFIG_JVM_ARGS
+export CONFIG_JVM_ARGS=-Djava.security.egd=file:/dev/./urandom:"$CONFIG_JVM_ARGS"
 
-${WLST_HOME}/wlst.sh ${SCRIPT_HOME}/crFRExtension.py
+"${WLST_HOME}/wlst.sh" "${SCRIPT_HOME}/crFRExtension.py"
 
 if [ "${FORMS12C}" == "true" ]; then
-  mkdir -p  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${MS_NAME4FORMS}/security
-  echo "username=${ADM_USER}" >  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${MS_NAME4FORMS}/security/boot.properties
-  echo "password=${ADM_PWD}" >> ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${MS_NAME4FORMS}/security/boot.properties
+  mkdir -p  "${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${FORMS_MS_NAME}/security"
+  echo "username=${ADM_USER}" >  "${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${FORMS_MS_NAME}/security/boot.properties"
+  echo "password=${ADM_PWD}" >> "${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${FORMS_MS_NAME}/security/boot.properties"
 fi
 
 
 if [ "${REPORTS12C}" == "true" ]; then
-  mkdir -p  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${MS_NAME4REPORTS}/security
-  echo "username=${ADM_USER}" >  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${MS_NAME4REPORTS}/security/boot.properties
-  echo "password=${ADM_PWD}" >> ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${MS_NAME4REPORTS}/security/boot.properties
+  mkdir -p  "${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${REPORTS_MS_NAME}/security"
+  echo "username=${ADM_USER}" >  "${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${REPORTS_MS_NAME}/security/boot.properties"
+  echo "password=${ADM_PWD}" >> "${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${REPORTS_MS_NAME}/security/boot.properties"
 fi
 

@@ -16,6 +16,8 @@
 #
 #=====================================================================
 # set -x
+#set -e
+set -u
 
 # Set Start Time
 start_time=$(date +%s)
@@ -49,22 +51,22 @@ if ! test -d "${DOMAIN_BASE}/${DOMAIN_NAME}"; then
   fi
   
   # In case we are facing problems with /dev/random
-  export CONFIG_JVM_ARGS=-Djava.security.egd=file:/dev/./urandom:$CONFIG_JVM_ARGS
+  export CONFIG_JVM_ARGS=-Djava.security.egd=file:/dev/./urandom:"$CONFIG_JVM_ARGS"
   # Avoiding MDS-11019 error messages
   export JAVA_OPTIONS="${JAVA_OPTIONS} -Dfile.encoding=UTF8"
   
-  ${WLST_HOME}/wlst.sh ${SCRIPT_HOME}/crDomain.py
+  "${WLST_HOME}/wlst.sh" "${SCRIPT_HOME}/crDomain.py"
   
-  mkdir -p  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${AS_NAME}/security
-  echo "username=${ADM_USER}" >  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${AS_NAME}/security/boot.properties
-  echo "password=${ADM_PWD}" >> ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${AS_NAME}/security/boot.properties
+  mkdir -p  "${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${AS_NAME}/security"
+  echo "username=${ADM_USER}" >  "${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${AS_NAME}/security/boot.properties"
+  echo "password=${ADM_PWD}" >> "${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${AS_NAME}/security/boot.properties"
   
   if [ "${FORMS12C}" == "true" ]  || [ "${REPORTS12C}" == "true" ]; then
     echo "==========================================="
     echo "Oracle Forms and Reports  will be configured"
     echo "==========================================="
-    cd ${SCRIPT_HOME}
-    ${SCRIPT_HOME}/crFRExtension.sh
+    cd "${SCRIPT_HOME}"
+    "${SCRIPT_HOME}/crFRExtension.sh"
     mkdir -p  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${FORMS_MS_NAME}/security
     echo "username=${ADM_USER}" >  ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${FORMS_MS_NAME}/security/boot.properties
     echo "password=${ADM_PWD}" >> ${DOMAIN_BASE}/${DOMAIN_NAME}/servers/${FORMS_MS_NAME}/security/boot.properties
@@ -78,18 +80,18 @@ if ! test -d "${DOMAIN_BASE}/${DOMAIN_NAME}"; then
     echo "==========================================="
     echo "Oracle Webtier will be configured"
     echo "==========================================="
-    nohup ${DOMAIN_BASE}/${DOMAIN_NAME}/bin/startNodeManager.sh > /dev/null 2>&1 &
+    nohup "${DOMAIN_BASE}/${DOMAIN_NAME}/bin/startNodeManager.sh" > /dev/null 2>&1 &
     echo "==========================================="
     echo " Node Manager starting, wait for 30 seconds"
     echo "==========================================="
     sleep 30
-    nohup ${DOMAIN_BASE}/${DOMAIN_NAME}/startWebLogic.sh > /dev/null 2>&1 &
+    nohup "${DOMAIN_BASE}/${DOMAIN_NAME}/startWebLogic.sh" > /dev/null 2>&1 &
     echo "==========================================="
     echo "Admin Server ${AS_NAME} starting, wait for 2 Minutes"
     echo "==========================================="
     sleep 120
-    cd ${SCRIPT_HOME}
-    ${SCRIPT_HOME}/crWebtierDomain.sh
+    cd "${SCRIPT_HOME}"
+    "${SCRIPT_HOME}/crWebtierDomain.sh"
     echo "DOMAIN with OHS is created"
   fi
   
@@ -97,13 +99,13 @@ if ! test -d "${DOMAIN_BASE}/${DOMAIN_NAME}"; then
     echo "==========================================="
     echo "Oracle Reports Server will be configured"
     echo "==========================================="
-    nohup ${DOMAIN_BASE}/${DOMAIN_NAME}/bin/startManagedWebLogic.sh ${REPORTS_MS_NAME} > /dev/null 2>&1 &
+    nohup "${DOMAIN_BASE}/${DOMAIN_NAME}/bin/startManagedWebLogic.sh" "${REPORTS_MS_NAME}" > /dev/null 2>&1 &
     echo "==========================================="
     echo "Starting Managed Server ${REPORTS_MS_NAME}, wait for 2 Minutes"
     echo "==========================================="
     sleep 120
-    cd ${SCRIPT_HOME}
-    ${SCRIPT_HOME}/crReports.sh
+    cd "${SCRIPT_HOME}"
+    "${SCRIPT_HOME}/crReports.sh"
     echo "Oracle Reports Server ${REP_SERVER_NAME} is created"
   fi
   
@@ -115,10 +117,10 @@ else
   # Docker Hack, if Domain is already created (first run), we will be here
   # and can startup the Forms & Reports Domain
   echo "Domain is already installed and will be started..."
-  nohup ${DOMAIN_BASE}/${DOMAIN_NAME}/bin/startNodeManager.sh > /dev/null 2>&1 &
+  nohup "${DOMAIN_BASE}/${DOMAIN_NAME}/bin/startNodeManager.sh" > /dev/null 2>&1 &
   echo "Wait 30 seconds for Node Manager to start ..."
   sleep 30
-  ${DOMAIN_BASE}/${DOMAIN_NAME}/startWebLogic.sh
+  "${DOMAIN_BASE}/${DOMAIN_NAME}/startWebLogic.sh"
 fi
 
 

@@ -14,7 +14,8 @@
 #
 #
 #=====================================================================
-
+#set -e
+set -u
 
 echo "======================================================================================"
 echo " Program  : crWebtierDomain.sh                                                ........"
@@ -27,14 +28,14 @@ if [  -z "${OHS_COMPONENTNAME}"  -o -z "${OHS_LISTENPORT}" -o -z "${OHS_SSLPORT}
 fi
 
 # In case we are facing problems with /dev/random
-export CONFIG_JVM_ARGS=-Djava.security.egd=file:/dev/./urandom:$CONFIG_JVM_ARGS
+export CONFIG_JVM_ARGS=-Djava.security.egd=file:/dev/./urandom:"$CONFIG_JVM_ARGS"
 
-${WLST_HOME}/wlst.sh ${SCRIPT_HOME}/crWebtierDomain.py
+"${WLST_HOME}/wlst.sh" "${SCRIPT_HOME}/crWebtierDomain.py"
 
 
 echo "======================================================================================"
 echo "Starting newly create OHS Component ${OHS_COMPONENTNAME} "
 echo "======================================================================================"
 
-echo ${NM_PWD} | ${DOMAIN_BASE}/${DOMAIN_NAME}/bin/startComponent.sh ${OHS_COMPONENTNAME} storeUserConfig
+echo "${NM_PWD}" | "${DOMAIN_BASE}/${DOMAIN_NAME}/bin/startComponent.sh" "${OHS_COMPONENTNAME}" storeUserConfig
 
