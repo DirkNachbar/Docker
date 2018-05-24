@@ -55,8 +55,8 @@ try:
     printHeader( "readDomain "+v_domain+" started")
     readDomain(v_setup_domain_base+'/'+v_domain)
     printInfo( "readDomain successful")
-except:
-    printInfo( "readDomain failed")
+except Exception, e:
+    printInfo("readDomain failed: " + str(e))
     exit()
 
 try:
@@ -70,8 +70,8 @@ try:
     printInfo( "select templates successful")
     loadTemplates()
     printInfo( "load templates successful")
-except:
-    printInfo( "select and load templates failed")
+except Exception, e:
+    printInfo("select and load templates failed: " + str(e))
     exit()
 
 printHeader("JDBC configuration")
@@ -87,8 +87,8 @@ try:
     cd('Property/user')
     cmo.setValue(v_SchemaPrefix+'_STB')
     printInfo("Configure LocalSvcTblDataSource successful")
-except:
-    printInfo("Configure LocalSvcTblDataSource failed")
+except Exception, e:
+    printInfo("Configure LocalSvcTblDataSource failed: " + str(e))
     exit()
 
 try:
@@ -103,8 +103,8 @@ try:
     cd('Property/user')
     cmo.setValue(v_SchemaPrefix+'_OPSS')
     printInfo("Configure opss-data-source successful")
-except:
-    printInfo("Configure opss-data-source failed")
+except Exception, e:
+    printInfo("Configure opss-data-source failed: " + str(e))
     exit()
 
 try:
@@ -119,8 +119,8 @@ try:
     cd('Property/user')
     cmo.setValue(v_SchemaPrefix+'_IAU_VIEWER')
     printInfo("Configure opss-audit-viewDS successful")
-except:
-    printInfo("Configure opss-audit-viewDS failed")
+except Exception, e:
+    printInfo("Configure opss-audit-viewDS failed: " + str(e))
     exit()
 
 try:
@@ -135,8 +135,8 @@ try:
     cd('Property/user')
     cmo.setValue(v_SchemaPrefix+'_IAU_APPEND')
     printInfo("Configure opss-audit-DBDS successful")
-except:
-    printInfo("Configure opss-audit-DBDS failed")
+except Exception, e:
+    printInfo("Configure opss-audit-DBDS failed: " + str(e))
     exit()
 
 try:
@@ -146,8 +146,8 @@ try:
    changeDatasourceToXA('opss-audit-viewDS')
    changeDatasourceToXA('opss-data-source')
    printInfo("Modify Datasources successful")
-except:
-   printInfo("Modify Datasources failed")
+except Exception, e:
+   printInfo("Modify Datasources failed: " + str(e))
 
 printHeader('Customize Domain Settings')
 try:
@@ -166,14 +166,14 @@ try:
        cd('/Server/'+v_reportsMSName)
        cmo.setListenPort(int(v_reportsPort))
     printInfo("Modification of Name and Ports are successful")
-except:
-    printInfo("ERROR: Modification of Name and Ports are failed")
+except Exception, e:
+    printInfo("ERROR: Modification of Name and Ports are failed: " + str(e))
 
 try:
     if v_reports_in_forms == 'false':
         printInfo("Reports are remaining in own Managed Server")
-except:
-    printInfo("x")
+except Exception, e:
+    printInfo("Customize Domain Settings failed: " + str(e))
 
 try:
     if v_reports_in_forms == 'true':
@@ -185,8 +185,8 @@ try:
         cd('/Library/oracle.reports.applib#12.2.1@12.2.1')
         set('Target','cluster_forms')
         printInfo("Move Reports into Forms Managed Server are successful")
-except:
-    printInfo("ERROR: Move Reports into Forms Managed Server failed")
+except Exception, e:
+    printInfo("ERROR: Move Reports into Forms Managed Server failed: " + str(e))
 
 try:
     printHeader("Nodemanager Configuration")
@@ -200,15 +200,15 @@ try:
     cmo.setNodeManagerUsername(v_NMUsername)
     cmo.setNodeManagerPasswordEncrypted(v_NMPwd)
     printInfo("Nodemanager Configuration successful")
-except:
-    printInfo("ERROR: Nodemanager Configuration failed")
+except Exception, e:
+    printInfo("ERROR: Nodemanager Configuration failed: " + str(e))
 
 try:
     printHeader("AppDir will be set to "+v_setup_application_base+"/"+v_domain)
     try:
         setOption('AppDir',v_setup_application_base+"/"+v_domain)
     except Exception, e:
-        print "Error Message "+ str(e)
+        print "Error Message: "+ str(e)
 
     printInfo("Domain will be updated and saved")
     printInfo("... this can take up to 5 minutes")
@@ -218,12 +218,12 @@ try:
 
 #    exit()
 except:
-   print "Domain could not be saved"
+   print "Domain could not be saved: " + str(e)
 
 try:
     printHeader("Admin Server will be assigned to Machine")
     readDomain(v_setup_domain_base+'/'+v_domain)
-    printInfo( "readDomain successful")
+    printInfo("readDomain successful")
     cd('Servers/'+v_asName)
     set('Machine','AdminServerMachine')
     printInfo("Domain will be updated and saved")
@@ -231,8 +231,8 @@ try:
     updateDomain()
     closeDomain()
 #    exit()
-except:
-    printInfo( "readDomain failed")
+except Exception, e:
+    printInfo("readDomain failed: " + str(e))
     exit()
 
 try:
@@ -247,7 +247,7 @@ try:
     closeDomain()
     print "======================================================================================"
     exit()
-except:
-    printInfo( "readDomain failed")
+except Exception, e:
+    printInfo("readDomain failed: " + str(e))
     exit()
 
