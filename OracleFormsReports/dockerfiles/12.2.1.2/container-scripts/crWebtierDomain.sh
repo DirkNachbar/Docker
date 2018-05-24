@@ -10,7 +10,7 @@
 #
 # AUTHOR:  Dirk Nachbar (https://dirknachbar.blogspot.com) ,  2017
 #
-# Modified : 
+# Modified :
 #
 #
 #=====================================================================
@@ -22,8 +22,8 @@ echo "==========================================================================
 
 # Check the required Environment Variables for OHS COnfiguration
 if [  -z "${OHS_COMPONENTNAME}"  -o -z "${OHS_LISTENPORT}" -o -z "${OHS_SSLPORT}" ]; then
-   echo "Environment not set - Exit"
-   exit 1
+  echo "Environment not set - Exit"
+  exit 1
 fi
 
 # In case we are facing problems with /dev/random
