@@ -208,7 +208,7 @@ try:
     try:
         setOption('AppDir',v_setup_application_base+"/"+v_domain)
     except Exception, e:
-        print "Error Message: "+ str(e)
+        print "Error Message: " + str(e)
 
     printInfo("Domain will be updated and saved")
     printInfo("... this can take up to 5 minutes")
