@@ -72,6 +72,12 @@ After that you can create under [host directory for tools], e.g. `/u01/tools` a 
 ```
 vi /u01/tools/full_bkp.rman
 
+connect target sys/[your password]
+run {
+    backup database plus archivelog;
+}
+
+e.g.
 connect target sys/Oracle18c
 run {
     backup database plus archivelog;
