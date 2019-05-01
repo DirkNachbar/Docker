@@ -68,3 +68,18 @@ docker run -d --name oraxe18c \
               oracle/database:18.4.0-xe
 ```
 
+After that you can create under [host directory for tools], e.g. `/u01/tools` a simple rman backup script will following content and perform a first full backup with RMAN
+```
+vi /u01/tools/full_bkp.rman
+
+connect target sys/Oracle18c
+run {
+    backup database plus archivelog;
+}
+```
+
+To execute now a full backup simply run following docker command:
+```
+docker exec -it oraxe18c rman @/opt/oracle/tools/full_bkp.rman
+```
+
