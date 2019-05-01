@@ -37,6 +37,10 @@ Successfully tagged oracle/database:18.4.0-xe
 
   Build completed in 697 seconds.
 
+$ docker images
+REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE
+oracle/database      18.4.0-xe           ac71812fa9d3        About an hour ago   5.41GB
+
 ```
 
 ## Run the Container
