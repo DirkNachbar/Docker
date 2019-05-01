@@ -17,6 +17,10 @@ $ mkdir -p /u01/diag
 $ mkdir -p /u01/oradata
 $ mkdir -p /u01/fast_recovery_area
 $ mkdir -p /u01/tools
+$ chown -R oracle:oinstall /u01/diag
+$ chown -R oracle:oinstall /u01/oradata
+$ chown -R oracle:oinstall /u01/fast_recovery_area
+$ chown -R oracle:oinstall /u01/tools
 ```
 ## Build it
 To build the images just run below command:
@@ -36,4 +40,31 @@ Successfully tagged oracle/database:18.4.0-xe
 ```
 
 ## Run the Container
+Just run following command, which will create your Oracle XE 18c Container, mount the internal directories `/opt/oracle/oradata`, `/opt/oracle/diag`, `/opt/oracle/fast_recovery_area`and `/opt/oracle/tools` to your prior created directories on your Docker host and enables a port forwarding of the Listener Port 1521 to 1521
+```
+docker run -d --name oraxe18c \
+              -p 1521:1521
+              -e ORACLE_PWD=[your password] \
+              -e ORACLE_CHARACTERSET=[your characterset] \
+              -e TZ=[your timezone] \
+              -v [host directory for oradata]:/opt/oracle/oradata \
+              -v [host directory for diag]:/opt/oracle/diag \
+              -v [host directory for fast_recovery_area]:/opt/oracle/fast_recovery_area \
+              -v [host directory for tools]:/opt/oracle/tools \
+              [--network [your bridged network] \
+              oracle/database:18.4.0-xe
+
+# For Example
+docker run -d --name oraxe18c \
+              -p 1521:1521
+              -e ORACLE_PWD=Oracle18c \
+              -e ORACLE_CHARACTERSET=AL32UTF8 \
+              -e TZ=Europe/Zurich \
+              -v /u01/oradata:/opt/oracle/oradata \
+              -v /u01/diag:/opt/oracle/diag \
+              -v /u01/fast_recovery_area:/opt/oracle/fast_recovery_area \
+              -v /u01/tools:/opt/oracle/tools \
+              --network mynet \
+              oracle/database:18.4.0-xe
+```
 
