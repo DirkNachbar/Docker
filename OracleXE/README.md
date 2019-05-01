@@ -93,3 +93,8 @@ To execute now a full backup simply run following docker command:
 docker exec -it oraxe18c rman @/opt/oracle/tools/full_bkp.rman
 ```
 
+## License
+To download and run Oracle Database, regardless whether inside or outside a Docker container, you must download the binaries from the Oracle website and accept the license indicated at that page.
+
+All scripts and files hosted in this project and GitHub repository required to build the Docker images are, unless otherwise noted, released under [UPL 1.0](https://oss.oracle.com/licenses/upl/) license.
+
