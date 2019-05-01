@@ -77,7 +77,7 @@ run {
     backup database plus archivelog;
 }
 
-e.g.
+# For Example
 connect target sys/Oracle18c
 run {
     backup database plus archivelog;
