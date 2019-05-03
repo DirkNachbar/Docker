@@ -71,10 +71,48 @@ RUN cd $INSTALL_DIR && \
     rm -rf /var/cache/yum && \
     rm -f $INSTALL_FILE_1 && \
     rm -rf $ORACLE_HOME/demo && \
+    rm -rf $ORACLE_HOME/dmu && \
+    rm -rf $ORACLE_HOME/javavm && \
     rm -rf $ORACLE_HOME/md && \
     rm -rf $ORACLE_HOME/nls/demo && \
     rm -rf $ORACLE_HOME/odbc && \
-    rm -rf $ORACLE_HOME/rdbms/demo
+    rm -rf $ORACLE_HOME/rdbms/demo && \
+    rm -rf $ORACLE_HOME/R && \
+    rm -rf $ORACLE_HOME/instantclient && \
+    rm -rf $ORACLE_HOME/inventory && \
+    rm -rf $ORACLE_HOME/deinstall && \
+    rm -r  $ORACLE_HOME/lib/ra_aix_ppc64.zip && \
+    rm -r  $ORACLE_HOME/lib/ra_hpux_ia64.zip && \
+    rm -r  $ORACLE_HOME/lib/ra_solaris*.zip && \
+    rm -f  $ORACLE_HOME/lib/ra_windows64.zip && \
+    rm -f  $ORACLE_HOME/lib/ra_zlinux64.zip && \
+    rm -rf $ORACLE_HOME/crs && \
+    rm -f  $ORACLE_HOME/bin/asmcmd && \
+    rm -f  $ORACLE_HOME/bin/asmcmdcore && \
+    rm -f  $ORACLE_HOME/bin/bdschecksw && \
+    rm -f  £ORACLE_HOME/bin/dbv && \
+    rm -f  $ORACLE_HOME/bin/ldap* && \
+    rm -f  $ORACLE_HOME/bin/dbfs_client && \
+    rm -f  $ORACLE_HOME/bin/afdboot && \
+    rm -f  $ORACLE_HOME/bin/exp && \
+    rm -f  $ORACLE_HOME/bin/imp && \
+    rm -f  $ORACLE_HOME/bin/*.exe && \
+    rm -f  $ORACLE_HOME/bin/lcsscan && \
+    rm -f  $ORACLE_HOME/bin/dgmgrl && \
+    rm -f  $ORACLE_HOME/bin/nid && \
+    rm -f  $ORACLE_HOME/bin/orion && \
+    rm -f  $ORACLE_HOME/bin/procob && \
+    rm -f  $ORACLE_HOME/bin/setasmgid && \
+    rm -f  $ORACLE_HOME/bin/wrap && \
+    rm -f  $ORACLE_HOME/bin/*0 && \
+    rm -f  $ORACLE_HOME/bin/tnsping && \
+    rm -f  $ORACLE_HOME/bin/tkprof && \
+    rm -f  $ORACLE_HOME/bin/srvctl && \
+    rm -f  $ORCALE_HOME/bin/wrc && \
+    rm -rf $ORACLE_HOME/sdk && \
+    strip --remove-section=.comment $ORACLE_HOME/bin/oracle && \
+    strip --remove-section=.comment $ORACLE_HOME/bin/rman && \
+    strip --remove-section=.comment $ORACLE_HOME/bin/tnslsnr
 
 #############################################
 # -------------------------------------------
