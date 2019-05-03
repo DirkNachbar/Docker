@@ -1,0 +1,12 @@
+batch
+# Creating the jboss module for oracle
+module add --name=com.oracle --resources=/opt/jboss/wildfly/ojdbc8.jar --dependencies=javax.api,javax.transaction.api
+
+/subsystem=datasources/jdbc-driver=oracle:add(driver-name="oracle",driver-module-name="com.oracle",driver-class-name="oracle.jdbc.driver.OracleDriver",driver-xa-datasource-class-name="oracle.jdbc.xa.client.OracleXADataSource")
+
+# Adding a sample DataSource testDS
+data-source add --name=testDS --driver-name="oracle" --jndi-name="java:/jdbc/testDS" --statistics-enabled="true" --user-name="soe" --password="soe" --initial-pool-size="25" --max-pool-size="50" --min-pool-size="20" --connection-url="jdbc:oracle:thin:@oraxe18c:1521/XEPDB1" --check-valid-connection-sql="select 1 from dual"
+
+# Execute the batch
+run-batch
+
