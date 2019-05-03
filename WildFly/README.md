@@ -33,7 +33,10 @@ docker build [--build-arg WILDFLY_ADMIN_PWD=<your admin password>] -t wildfly .
 To run the WildFly Container with the Oracle JDBC Driver 18.3 simply execute:
 
 ```
-docker run -d --name wildfly [--network0<your bridged network>] -p <Your Host Port>:8080 -p <Your Host Port>:9990 wildfly
+docker run -d --name wildfly \
+              [--network0<your bridged network>] \
+              -p <Your Host Port>:8080 -p <Your Host Port>:9990 \
+              wildfly
 ```
 
 
