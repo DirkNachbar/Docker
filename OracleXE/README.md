@@ -1,6 +1,8 @@
 Optimized Oracle XE 18c on Docker
 =====
-Build a Docker image containing Oracle XE 18c with optimized size (5.41 GB instead of 8.7 GB) including Archivelog Mode and Flashback
+Changes: 3rd May 2019: Docker image more optimized from 5.41 GB to 4.02 GB
+
+Build a Docker image containing Oracle XE 18c with optimized size (4.02 GB instead of 8.7 GB) including Archivelog Mode and Flashback
 
 
 ## Oracle XE 18c Software
@@ -39,8 +41,7 @@ Successfully tagged oracle/database:18.4.0-xe
 
 $ docker images
 REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE
-oracle/database      18.4.0-xe           ac71812fa9d3        About an hour ago   5.41GB
-
+oracle/database      18.4.0-xe           2018ad58d2f3        16 hours ago        4.02GB
 ```
 
 ## Run the Container
