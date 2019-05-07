@@ -25,7 +25,7 @@ FROM oraclelinux:7-slim as base
 
 # Maintainer
 # ----------
-MAINTAINER Dirk Nachbar <dirk.nachbar@trivadis.com>
+LABEL maintainer="dirk.nachbar@trivadis.com"
 
 # Environment variables required for this build (do NOT change)
 # -------------------------------------------------------------
