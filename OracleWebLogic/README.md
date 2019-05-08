@@ -23,6 +23,7 @@ At first build the Oracle Server JRE Image:
 $ cd dockerfiles/12.2.1.3/serverjre
 $ ./buildDockerImage.sh
 $ docker images | grep serverjre
+REPOSITORY           TAG                  IMAGE ID            CREATED             SIZE
 oracle/serverjre     8                    63b4768f6557        About an hour ago   387MB
 ```
 
