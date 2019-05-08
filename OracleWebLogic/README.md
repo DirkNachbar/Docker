@@ -79,13 +79,21 @@ Before creating and running the Oracle WebLogic 12.2.1.3.0 Container align in th
 As next you can run following command:
 
 ```
-$ docker run -d --name <ContainerName> -p 7001:7001 -p 9002:9002 -v <Host Path to subdirectory properties>:/u01/oracle/properties -e ADMINISTRATION_PORT_ENABLED=true -e DOMAIN_NAME=<DomainName> oracle/weblogic:12.2.1.3-optimized
+$ docker run -d --name <ContainerName> \
+             -p 7001:7001 -p 9002:9002 \
+             -v <Host Path to subdirectory properties>:/u01/oracle/properties \
+             -e ADMINISTRATION_PORT_ENABLED=true -e DOMAIN_NAME=<DomainName> \
+             oracle/weblogic:12.2.1.3-optimized
 
 $ docker logs -f <ContainerName>
 
 # For Example:
 
-$ docker run -d --name wls12213optimized -p 7001:7001 -p 9002:9002 -v /work/OracleWebLogic/dockerfiles/12.2.1.3/properties:/u01/oracle/properties -e ADMINISTRATION_PORT_ENABLED=true -e DOMAIN_NAME=OptimizedDomain oracle/weblogic:12.2.1.3-optimized
+$ docker run -d --name wls12213optimized \
+             -p 7001:7001 -p 9002:9002 \
+             -v /work/OracleWebLogic/dockerfiles/12.2.1.3/properties:/u01/oracle/properties \
+             -e ADMINISTRATION_PORT_ENABLED=true -e DOMAIN_NAME=OptimizedDomain \
+             oracle/weblogic:12.2.1.3-optimized
 
 $ docker logs -f wls12213optimized
 
