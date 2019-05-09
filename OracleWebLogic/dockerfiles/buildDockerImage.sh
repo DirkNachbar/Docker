@@ -49,10 +49,12 @@ if [ "$#" -eq 0 ]; then usage; fi
 # Parameters
 DEVELOPER=0
 GENERIC=0
+OPTIMIZED=0
+OPITMIZED_PATCH=0
 VERSION="12.2.1.3"
 SKIPMD5=0
 NOCACHE=true
-while getopts "hcsdgoiv:" optname; do
+while getopts "hcsdgopiv:" optname; do
   case "$optname" in
     "h")
       usage
@@ -69,6 +71,9 @@ while getopts "hcsdgoiv:" optname; do
     "o")
       OPTIMIZED=1
       ;;
+    "p")
+      OPTIMIZED_PATCH=1
+      ;;
     "v")
       VERSION="$OPTARG"
       ;;
@@ -83,7 +88,7 @@ while getopts "hcsdgoiv:" optname; do
 done
 
 # Which distribution to use?
-if [ $((DEVELOPER + GENERIC + OPTIMIZED)) -gt 1 ]; then
+if [ $((DEVELOPER + GENERIC + OPTIMIZED + OPTIMIZED_PATCH)) -gt 1 ]; then
   usage
 elif [ $DEVELOPER -eq 1 ]; then
   DISTRIBUTION="developer"
@@ -91,8 +96,10 @@ elif [ $GENERIC -eq 1 ]; then
   DISTRIBUTION="generic"
 elif [ $OPTIMIZED -eq 1 ]; then
   DISTRIBUTION="optimized"
+elif [ $OPTIMIZED_PATCH -eq 1 ]; then
+  DISTRIBUTION="optimized_patch"
 else
-  echo "Invalid distribution, please elect one distribution only: -d, or -g"
+  echo "Invalid distribution, please elect one distribution only: -d, or -g or -o or -p"
   exit 1
 fi
 

@@ -13,8 +13,17 @@ oracle/weblogic      12.2.1.3-generic     ba0d1c2dc430        25 minutes ago    
 ## Prerequirements
 You will need to complete following requirements to build the optimized Oracle WebLogic 12.2.1.3.0 Image:
 
+If you don't have a My Oracle Support Login you will have to download the Oracle Server JRE 8u152, as with a higher Oracle Server JRE you will run into a bug during the WebLogic Domain creation.
+
 * [Download Oracle Server JRE 8u152](https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html) and place the tar.gz file into the subdirectory dockerfiles/12.2.1.3/serverjre
 * [Download Oracle WebLogic Server 12.2.1.3.0 Generic](https://www.oracle.com/technetwork/middleware/weblogic/downloads/index.html) and place the zip file into the subdirectory dockerfiles/12.2.1.3
+
+In case you have a My Oracle Support Login, you can use a higher version that Oracle Server JRE 8u512, for example Oracle Server JRE 8u202. Than download following files:
+
+* [Download Oracle Server JRE 8u202](https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html) and place the tar.gz file into the subdirectory dockerfiles/12.2.1.3/serverjre
+* [Download Oracle WebLogic Server 12.2.1.3.0 Generic](https://www.oracle.com/technetwork/middleware/weblogic/downloads/index.html) and place the zip file into the subdirectory dockerfiles/12.2.1.3
+* [Download OPatch Patch, Patch 28186730 from My Oracle Support](https://updates.oracle.com/Orion/Services/download/p28186730_139400_Generic.zip?aru=22731294&patch_file=p28186730_139400_Generic.zip) and place the zip file into the subdirectory dockerfiles/12.2.1.3
+* [Download CPU Patch April 2019, Patch 29016089](https://updates.oracle.com/Orion/Services/download/p29016089_122130_Generic.zip?aru=22640288&patch_file=p29016089_122130_Generic.zip) and place the zip file into the subdirectory dockerfiles/12.2.1.3
 
 ## Build the Oracle Server JRE Image
 At first build the Oracle Server JRE Image:
@@ -28,7 +37,9 @@ oracle/serverjre     8                    63b4768f6557        About an hour ago 
 ```
 
 ## Build the Optimized WebLogic Image
-After the successful build of the Oracle Server JRE Image you can build the optimized WebLogic 12.2.1.3.0 Image
+After the successful build of the Oracle Server JRE Image you can build the optimized WebLogic 12.2.1.3.0 Image.
+
+In case you dont have a My Oracle Support and you are forced to use Oracle Server JRE 8u512 please use following commands with the option `-o`
 
 ```
 $ cd dockerfiles
@@ -75,16 +86,67 @@ REPOSITORY           TAG                  IMAGE ID            CREATED           
 oracle/weblogic      12.2.1.3-optimized   854be1c2bbb9        24 minutes ago      1.4GB
 ```
 
+In case you a My Oracle Suppport and you have downloaded the above mentioned 2 patches, you can build your Docker Image with the option `-p`
+
+```
+$ cd dockerfiles
+$ ./buildDockerImage.sh -v 12.2.1.3 -p
+
+Checking if required packages are present and valid...
+fmw_12.2.1.3.0_wls_Disk1_1of1.zip: OK
+=====================
+Building image 'oracle/weblogic:12.2.1.3-optimized_patch' ...
+Sending build context to Docker daemon    839MB
+Step 1/17 : FROM oracle/serverjre:8 as base
+ ---> 63b4768f6557
+Step 2/17 : LABEL maintainer="dirk.nachbar@trivadis.com"
+ ---> Running in 9bfcf5aaa1d4
+Removing intermediate container 9bfcf5aaa1d4
+ ---> 6cff4f8712d8
+. . .
+. . .
+Step 13/17 : FROM base
+ ---> 718f0506dfb8
+Step 14/17 : COPY --chown=oracle:oracle --from=builder $ORACLE_HOME $ORACLE_HOME
+ ---> 46ee0e3fd822
+Step 15/17 : COPY --chown=oracle:oracle --from=builder $JAVA_HOME $JAVA_HOME
+ ---> bddc30cf710e
+Step 16/17 : WORKDIR ${ORACLE_HOME}
+ ---> Running in b7a122dc521b
+Removing intermediate container b7a122dc521b
+ ---> 1b2aa03acef6
+Step 17/17 : CMD ["/u01/oracle/createAndStartEmptyDomain.sh"]
+ ---> Running in 296506a7fc03
+Removing intermediate container 296506a7fc03
+ ---> 854be1c2bbb9
+Successfully built 854be1c2bbb9
+Successfully tagged oracle/weblogic:12.2.1.3-optimized_patch
+
+  WebLogic Docker Image for 'optimized_patch' version 12.2.1.3 is ready to be extended:
+
+    --> oracle/weblogic:12.2.1.3-optimized_patch
+
+  Build completed in 258 seconds.
+
+$ docker images
+REPOSITORY           TAG                        IMAGE ID            CREATED             SIZE
+oracle/weblogic      12.2.1.3-optimized_patch   2e2ca542ba03        21 hours ago        1.49GB
+```
+
+
 ## Create the Oracle WebLogic Container
 Before creating and running the Oracle WebLogic 12.2.1.3.0 Container align in the subdirectory `dockerfiles/12.2.1.3/properties` in the properties file `domain.properties` the provided username and password.
 As next you can run following command:
 
 ```
+# Define the Docker Image based on your above Docker Image build
+# Either its "oracle/weblogic:12.2.1.3-optimized" or "oracle/weblogic:12.2.1.3-optimized_patch"
+
 $ docker run -d --name <ContainerName> \
              -p 7001:7001 -p 9002:9002 \
              -v <Host Path to subdirectory properties>:/u01/oracle/properties \
              -e ADMINISTRATION_PORT_ENABLED=true -e DOMAIN_NAME=<DomainName> \
-             oracle/weblogic:12.2.1.3-optimized
+             oracle/[weblogic:12.2.1.3-optimized|weblogic:12.2.1.3-optimized_patch]
 
 $ docker logs -f <ContainerName>
 
@@ -94,7 +156,7 @@ $ docker run -d --name wls12213optimized \
              -p 7001:7001 -p 9002:9002 \
              -v /work/OracleWebLogic/dockerfiles/12.2.1.3/properties:/u01/oracle/properties \
              -e ADMINISTRATION_PORT_ENABLED=true -e DOMAIN_NAME=OptimizedDomain \
-             oracle/weblogic:12.2.1.3-optimized
+             oracle/[weblogic:12.2.1.3-optimized|weblogic:12.2.1.3-optimized_patch]
 
 $ docker logs -f wls12213optimized
 
