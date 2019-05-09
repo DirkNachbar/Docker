@@ -12,7 +12,7 @@
 usage() {
 cat << EOF
 
-Usage: buildDockerImage.sh -v [version] [-d | -g ] [-s] [-c]
+Usage: buildDockerImage.sh -v [version] [-d | -g | -o | -p] [-s] [-c]
 Builds a Docker Image for Oracle WebLogic.
 
 Parameters:
@@ -20,10 +20,12 @@ Parameters:
        Choose one of: $(for i in $(ls -d */); do echo -n "${i%%/}  "; done)
    -d: creates image based on 'developer' distribution
    -g: creates image based on 'generic' distribution
+   -o: creates an space optimized image based on 'generic' distribution
+   -p: creates an space optimized image based on 'generic' distribution incl. CPU April 2019 Patch
    -c: enables Docker image layer cache during build
    -s: skips the MD5 check of packages
 
-* select one distribution only: -d, or -g
+* select one distribution only: -d, or -g, or -o, or -p
 
 LICENSE UPL 1.0
 
