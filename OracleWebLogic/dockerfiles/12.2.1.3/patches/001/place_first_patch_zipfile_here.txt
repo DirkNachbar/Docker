@@ -1,0 +1,2 @@
+Placeholder File for placing your first Oracle WebLogic 12.2.1.3.0 Patch Zipfile here
+

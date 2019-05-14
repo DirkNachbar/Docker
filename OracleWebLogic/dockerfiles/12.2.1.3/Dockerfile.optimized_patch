@@ -24,6 +24,12 @@
 # ---------
 # The resulting image of this Dockerfile contains a WLS Empty Domain.
 #
+# ***********  CHANGES ****************
+# ------------------------------------- 
+# MODIFICATION: - Complete re-design in order to reduce the Image size from 2.9 GB down to 1.4 GB
+#               - Adding flexible Patch Apply Possibility
+# AUTHOR:       Dirk Nachbar, Trivadis AG, Switzerland
+#
 # Pull base image
 # From the Oracle Registry
 # -------------------------
@@ -64,13 +70,16 @@ ENV DOMAIN_NAME="${DOMAIN_NAME:-base_domain}" \
 ENV FMW_PKG=fmw_12.2.1.3.0_wls_Disk1_1of1.zip \
     FMW_JAR=fmw_12.2.1.3.0_wls.jar \
     PATCH_OPATCH=p28186730_139400_Generic.zip \
-    PATCH_CPU=p29016089_122130_Generic.zip
+    PATCH_DIR=patches
+
+ENV PATCH_INSTALL_DIR=/u01/$PATCH_DIR
 
 FROM base as builder
 
 # Copy packages
 # -------------
-COPY $FMW_PKG install.file oraInst.loc $PATCH_OPATCH $PATCH_CPU /u01/
+COPY $FMW_PKG install.file oraInst.loc /u01/
+COPY $PATCH_DIR /u01/patches/
 RUN  chown oracle:oracle -R /u01 && \
      chmod +xr $SCRIPT_FILE
 
@@ -85,14 +94,12 @@ USER oracle
 RUN cd /u01 && ${JAVA_HOME}/bin/jar xf /u01/$FMW_PKG && cd - && \
     ls /u01 && \
     ${JAVA_HOME}/bin/java -jar /u01/$FMW_JAR -silent -responseFile /u01/install.file -invPtrLoc /u01/oraInst.loc -jreLoc $JAVA_HOME -ignoreSysPrereqs -force -novalidation ORACLE_HOME=$ORACLE_HOME INSTALL_TYPE="WebLogic Server" && \
-    cd /u01 && $JAVA_HOME/bin/jar xf /u01/$PATCH_OPATCH && \
-    java -jar /u01/6880880/opatch_generic.jar -silent oracle_home=/u01/oracle -ignoreSysPrereqs && \
+    cd $PATCH_INSTALL_DIR && $JAVA_HOME/bin/jar xf $PATCH_INSTALL_DIR/$PATCH_OPATCH && \
+    java -jar $PATCH_INSTALL_DIR/6880880/opatch_generic.jar -silent oracle_home=/u01/oracle -ignoreSysPrereqs && \
+    rm -rf $PATCH_INSTALL_DIR/6880880 && \
     echo "opatch updated" && sleep 5 && \
-    cd /u01 && $JAVA_HOME/bin/jar xf /u01/$PATCH_CPU && \
-    cd /u01/29016089 && $ORACLE_HOME/OPatch/opatch apply -silent && \
+    $PATCH_INSTALL_DIR/applyPatches.sh && \
     $ORACLE_HOME/OPatch/opatch util cleanup -silent && \
-    rm /u01/$PATCH_OPATCH && rm /u01/$PATCH_CPU && \
-    rm -rf /u01/6880880 && rm -rf /u01/29016089 && \
     rm -rf /u01/oracle/cfgtoollogs/opatch/* && \
     rm /u01/$FMW_JAR /u01/$FMW_PKG /u01/oraInst.loc /u01/install.file
 
