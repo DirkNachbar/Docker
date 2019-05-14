@@ -29,7 +29,7 @@ For example you want to apply directly at your Image build the Oracle CPU April 
 In case you will have a 3rd patch to install, just create the directory `patches/003` and place your patch zipfile into the `patch/003`folder, the applyPatches.sh script, which is executed within the Image build, will take care of everything ;-)
 
 ```
-cd dockerfiles/12.2.1.3.0/patches
+cd dockerfiles/12.2.1.3/patches
 tree
 ├── 001
 │   └── p29016089_122130_Generic.zip
