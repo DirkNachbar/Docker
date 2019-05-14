@@ -22,7 +22,9 @@ In case you have a My Oracle Support Login, you can use a higher version that Or
 
 ### IMPORTANT CHANGES 14th May 2019
 I have changed the patch apply procedure completely, instead of using hard-coded patch number, you can use a flexible patch concept now:
+
 For this, download your desired patches (only the OPatch Patch 28186730 is mandatory) and place each single patch in a subdirectory `patches/00n`
+
 For example you want to apply directly at your Image build the Oracle CPU April 2019 for WebLogic 12.2.1.3.0 (Patch no. 29016089) and the Patch 29637821. Just download the 2 patches and place the Patch 29016089 in `patches/001` and the Patch 29637821 in `patches/002`. The OPatch Patch 28186730, which is mandatory, you need to place in `patches`. 
 
 ```
