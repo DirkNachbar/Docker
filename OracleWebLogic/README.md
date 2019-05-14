@@ -18,12 +18,30 @@ If you don't have a My Oracle Support Login you will have to download the Oracle
 * [Download Oracle Server JRE 8u152](https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html) and place the tar.gz file into the subdirectory dockerfiles/12.2.1.3/serverjre
 * [Download Oracle WebLogic Server 12.2.1.3.0 Generic](https://www.oracle.com/technetwork/middleware/weblogic/downloads/index.html) and place the zip file into the subdirectory dockerfiles/12.2.1.3
 
-In case you have a My Oracle Support Login, you can use a higher version that Oracle Server JRE 8u512, for example Oracle Server JRE 8u202. Than download following files:
+In case you have a My Oracle Support Login, you can use a higher version that Oracle Server JRE 8u512, for example Oracle Server JRE 8u202. 
+
+CHANGES 14th May 2019: I have changed the patch apply procedure completely, instead of using hard-coded patch number, you can use a flexible patch concept now:
+For this, download your desired patches (only the OPatch Patch 28186730 is mandatory) and place each single patch in a subdirectory `patches/00n`
+For example you want to apply directly at your Image build the Oracle CPU April 2019 for WebLogic 12.2.1.3.0 (Patch no. 29016089) and the Patch 29637821. Just download the 2 patches and place the Patch 29016089 in `patches/001` and the Patch 29637821 in `patches/002`. The OPatch Patch 28186730, which is mandatory, you need to place in `patches`. 
+
+```
+cd dockerfiles/12.2.1.3.0/patches
+tree
+├── 001
+│   └── p29016089_122130_Generic.zip
+├── 002
+│   └── p29637821_122130_Generic.zip
+├── applyPatches.sh
+└── p28186730_139400_Generic.zip
+```
+
+So download following files:
 
 * [Download Oracle Server JRE 8u202](https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html) and place the tar.gz file into the subdirectory dockerfiles/12.2.1.3/serverjre
 * [Download Oracle WebLogic Server 12.2.1.3.0 Generic](https://www.oracle.com/technetwork/middleware/weblogic/downloads/index.html) and place the zip file into the subdirectory dockerfiles/12.2.1.3
-* [Download OPatch Patch, Patch 28186730 from My Oracle Support](https://updates.oracle.com/Orion/Services/download/p28186730_139400_Generic.zip?aru=22731294&patch_file=p28186730_139400_Generic.zip) and place the zip file into the subdirectory dockerfiles/12.2.1.3
-* [Download CPU Patch April 2019, Patch 29016089](https://updates.oracle.com/Orion/Services/download/p29016089_122130_Generic.zip?aru=22640288&patch_file=p29016089_122130_Generic.zip) and place the zip file into the subdirectory dockerfiles/12.2.1.3
+* [Download OPatch Patch, Patch 28186730 from My Oracle Support](https://updates.oracle.com/Orion/Services/download/p28186730_139400_Generic.zip?aru=22731294&patch_file=p28186730_139400_Generic.zip) and place the zip file into the subdirectory dockerfiles/12.2.1.3/patches
+* [Download CPU Patch April 2019, Patch 29016089](https://updates.oracle.com/Orion/Services/download/p29016089_122130_Generic.zip?aru=22640288&patch_file=p29016089_122130_Generic.zip) and place the zip file into the subdirectory dockerfiles/12.2.1.3/patches/00n
+* any desired patch which you need on top, place them into `patches/00n`
 
 ## Build the Oracle Server JRE Image
 At first build the Oracle Server JRE Image:
