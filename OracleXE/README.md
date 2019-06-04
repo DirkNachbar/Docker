@@ -77,15 +77,21 @@ After that you can create under [host directory for tools], e.g. `/u01/tools` a 
 ```
 vi /u01/tools/full_bkp.rman
 
-connect target sys/[your password]
+connect target sys/[your password]@XE
 run {
     backup database plus archivelog;
 }
 
 # For Example
-connect target sys/Oracle18c
+connect target sys/Oracle18c@XE
 run {
     backup database plus archivelog;
+}
+
+# Or as compressed backupset plus delete backed up archivelogs
+connect target sys/Oracle18c@XE
+run {
+    backup as compressed backupset database plus archivelog delete input;
 }
 ```
 
