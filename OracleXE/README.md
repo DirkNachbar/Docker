@@ -61,7 +61,7 @@ docker run -d --name oraxe18c \
 
 # For Example
 docker run -d --name oraxe18c \
-              -p 1521:1521
+              -p 1521:1521 \
               -e ORACLE_PWD=Oracle18c \
               -e ORACLE_CHARACTERSET=AL32UTF8 \
               -e TZ=Europe/Zurich \
