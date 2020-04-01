@@ -67,12 +67,12 @@ oracle/weblogic     14.1.1.0.0-optimized   ebe06a93a85b        5 minutes ago    
 ```
 
 ## Create the Oracle WebLogic Container
-Before creating and running the Oracle WebLogic 12.2.1.3.0 Container align in the subdirectory `dockerfiles/12.2.1.3/properties` in the properties file `domain.properties` the provided username and password.
+Before creating and running the Oracle WebLogic 14.1.1.0.0 Container align in the subdirectory `dockerfiles/14.1.1.0.0/properties` in the properties file `domain.properties` the provided username and password.
 As next you can run following command:
 
 ```
 # Define the Docker Image based on your above Docker Image build
-# Either its "oracle/weblogic:12.2.1.3-optimized" or "oracle/weblogic:12.2.1.3-optimized_patch"
+# Either its "oracle/weblogic:14.1.1.0.0-optimized" or "oracle/weblogic:14.1.1.0.0"
 
 $ docker run -d --name <ContainerName> \
              -p 7001:7001 -p 9002:9002 \
