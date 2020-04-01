@@ -72,7 +72,7 @@ As next you can run following command:
 
 ```
 # Define the Docker Image based on your above Docker Image build
-# Either its "oracle/weblogic:14.1.1.0.0-optimized" or "oracle/weblogic:14.1.1.0.0"
+# Either its "oracle/weblogic:14.1.1.0.0-optimized" or "oracle/weblogic:14.1.1.0.0-generic"
 
 $ docker run -d --name <ContainerName> \
              -p 7001:7001 -p 9002:9002 \
