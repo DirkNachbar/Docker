@@ -16,7 +16,7 @@ Builds a Docker Image for Oracle Forms & Reports
 Parameters:
    -h: view usage
    -v: Release version to build. Required. Allowed values are
-       12.2.1.2, 12.2.1.3
+       12.2.1.2, 12.2.1.3, 12.2.1.4
    -s: Skip checksum verification
 
 EOF
@@ -45,7 +45,7 @@ EOF
   done
 fi
 
-if [[ "${DC_FADS12C}" == "true"  &&  "${VERSION}" == "12.2.1.3" ]]; then
+if [[ "${DC_FADS12C}" == "true"  &&  "${VERSION}" =~ 12.2.1.[34] ]]; then
   jarList=`grep -v -e "^#.*" install/formsreports_fads.download | awk '{print $2}'`
   for jar in ${jarList}; do
      if [ -s ${jar} ]; then
@@ -117,7 +117,7 @@ fi
 . ../setenv.sh
 
 versionOK=false
-if [ ${VERSION} = 12.2.1.2 -o ${VERSION} = 12.2.1.3 ]
+if [[ "${VERSION}" =~ 12.2.1.[2-4] ]]
 then
   IMAGE_NAME="${DC_REGISTRY_FR}/oracle/formsreports:$VERSION"
   if [ "${DC_FADS12C}" == "false" ]; then
