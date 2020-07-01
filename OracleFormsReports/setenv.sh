@@ -6,6 +6,8 @@
 #
 # Directory where all domains/db data etc are 
 # kept. Directories will be created here
+export DC_HOST_VOL=/home/<user>/oracle/projects  # CHANGE ME
+# The mount point within docker
 export DC_USERHOME=/opt/oracle
 
 # Registry names where requisite standard images
