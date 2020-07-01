@@ -78,6 +78,4 @@ services:
       - DB_USER_PW=${DC_DB_USER_PW}
       - PWDFILE=${DC_PWDFILE}
     volumes:
-      - ${DC_DDIR_FR}:/opt/oracle/user_projects
-
-
+      - ${DC_HOST_VOL}:/opt/oracle/user_projects
